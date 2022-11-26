@@ -15,9 +15,15 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
-import { Avatar, Button } from "@mui/material";
+import { Avatar, Button, MenuList } from "@mui/material";
 import Popover from "@mui/material/Popover";
 import img1 from "../../assets/logo.png";
+import HoverPopover from "material-ui-popup-state/HoverPopover";
+import {
+  usePopupState,
+  bindHover,
+  bindPopover,
+} from "material-ui-popup-state/hooks";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -157,17 +163,10 @@ export default function PrimarySearchAppBar() {
     </Menu>
   );
   // popover
-  const [anchorEl1, setAnchorEl1] = React.useState(null);
-
-  const handlePopoverOpen = (event) => {
-    setAnchorEl1(event.currentTarget);
-  };
-
-  const handlePopoverClose = () => {
-    setAnchorEl1(null);
-  };
-  const open = Boolean(anchorEl1);
-
+  const popupState = usePopupState({
+    variant: "popover",
+    popupId: "demoPopover",
+  });
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
@@ -211,22 +210,17 @@ export default function PrimarySearchAppBar() {
             }}
           >
             {/* popover */}
-            <Box>
-              <Typography
-                aria-owns={open ? "mouse-over-popover" : undefined}
-                aria-haspopup="true"
-                onMouseEnter={handlePopoverOpen}
-                // onMouseLeave={handlePopoverClose}
+            <div>
+              <Button
+                variant="outlined"
+                color="inherit"
+                {...bindHover(popupState)}
+                sx={{ border: "0" }}
               >
                 EXPLORE
-              </Typography>
-              <Popover
-                id="mouse-over-popover"
-                sx={{
-                  pointerEvents: "none",
-                }}
-                open={open}
-                anchorEl={anchorEl1}
+              </Button>
+              <HoverPopover
+                {...bindPopover(popupState)}
                 anchorOrigin={{
                   vertical: "bottom",
                   horizontal: "left",
@@ -235,57 +229,16 @@ export default function PrimarySearchAppBar() {
                   vertical: "top",
                   horizontal: "left",
                 }}
-                onClose={handlePopoverClose}
-                disableRestoreFocus
               >
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "8px",
-                  }}
-                >
-                  <Button>alo1</Button>
-                  <Button>alo1</Button>
-                  <Button>alo1</Button>
-                  <Button>alo1</Button>
-                  <Button>alo1</Button>
-                </Box>
-              </Popover>
-            </Box>
+                <Typography style={{ margin: 10 }}>
+                  The content of the Popover.
+                </Typography>
+              </HoverPopover>
+            </div>
             {/* end popover */}
 
             {/* popover */}
-            <Box>
-              <Typography
-                aria-owns={open ? "mouse-over-popover" : undefined}
-                aria-haspopup="true"
-                onMouseEnter={handlePopoverOpen}
-                onMouseLeave={handlePopoverClose}
-              >
-                RESOURCES
-              </Typography>
-              <Popover
-                id="mouse-over-popover"
-                sx={{
-                  pointerEvents: "none",
-                }}
-                open={open}
-                anchorEl={anchorEl1}
-                anchorOrigin={{
-                  vertical: "bottom",
-                  horizontal: "left",
-                }}
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "left",
-                }}
-                onClose={handlePopoverClose}
-                disableRestoreFocus
-              >
-                <Typography sx={{ p: 1 }}>I use Popover.</Typography>
-              </Popover>
-            </Box>
+
             {/* end popover */}
 
             <IconButton
