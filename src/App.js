@@ -10,6 +10,7 @@ import { ethers } from "ethers";
 import "./App.css";
 import AppBar from "./components/Appbar/AppBar";
 import Landing from "./pages/Landing/Landing";
+import Accounts from "./pages/Accounts/Accounts";
 
 const App = () => {
   return (
@@ -17,11 +18,12 @@ const App = () => {
       <Box className="app">
         <AppBar />
         <Box className="container">
-          <Container className="pages" maxWidth="xl">
+          <Box className="pages" sx={{ maxWidth: "100%" }}>
             <Switch>
               <Route path="/" exact component={Landing} />
+              <Route path="/account" exact component={Accounts} />
             </Switch>
-          </Container>
+          </Box>
         </Box>
       </Box>
     </BrowserRouter>
