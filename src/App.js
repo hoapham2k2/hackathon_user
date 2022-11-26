@@ -12,19 +12,17 @@ import AppBar from "./components/Appbar/AppBar";
 import Landing from "./pages/Landing/Landing";
 
 const App = () => {
- 
   return (
     <BrowserRouter>
-    <Box className="app" >
-      <AppBar/>
-      <Box className="container" >
-        <Container className="pages" maxWidth="xl"  >
-        <Switch>
-        <Route path="/" exact component={Landing} />
-        </Switch>
-
-        </Container>
-      </Box>
+      <Box className="app">
+        <AppBar />
+        <Box className="container">
+          <Container className="pages" maxWidth="xl">
+            <Switch>
+              <Route path="/" exact component={Landing} />
+            </Switch>
+          </Container>
+        </Box>
       </Box>
     </BrowserRouter>
   );
